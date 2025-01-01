@@ -2,17 +2,17 @@ local M = {}
 
 function M.setup(opts)
 	opts = opts or {}
-	require("config").setup(opts)
-	require("keymaps").setup()
+	require("todo.config").setup(opts)
+	require("todo.keymaps").setup()
+
+	local config = require("todo.config")
 
 	-- setup todo filetype
 	vim.filetype.add({
 		extension = {
-			todo = opts.filetype,
+			todo = config.options.ft,
 		},
 	})
 end
-
-print("loaded plugin todo.nvim")
 
 return M
