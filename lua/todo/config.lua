@@ -2,6 +2,8 @@ local M = {}
 
 M.defaults = {
 	ft = 'todo',
+	-- todo_states = { ' ', 'x', '-', 'D' },
+	todo_states = ' x-D',
 	-- option2 = 'default_value',
 }
 
