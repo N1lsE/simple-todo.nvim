@@ -19,9 +19,9 @@ Maby this is too simple for your needs. You might also look into:
 ### **With `lazy.nvim`**
 ```lua
 {
-    "N1lsE/todo.nvim",
+    "N1lsE/simple-todo.nvim",
     config = function()
-        require('todo').setup()
+        require('simple-todo.todo').setup()
     end
 }
 ```
