@@ -30,10 +30,16 @@ local function is_str_todo(line)
 	return line:match("^- %[.%] ") ~= nil
 end
 
+---@return boolean
+function M.fn.is_line_todo()
+	local line_content = vim.api.nvim_get_current_line()
+	return is_str_todo(line_content)
+end
+
 ---@param current_state string -- len 1 (a char)
 ---@return string -- len 1 (the next state char)
 local function next_todo_state(current_state)
-	local config = require('todo.config')
+	local config = require("todo.config")
 	local todo_states = config.options.todo_states
 	local len = #todo_states
 
@@ -43,9 +49,10 @@ local function next_todo_state(current_state)
 		end
 	end
 
-	return ' ' -- Default return
+	return " " -- Default return
 end
 
+---@return nil
 function M.fn.new_todo()
 	local cursor_line = vim.api.nvim_win_get_cursor(0)[1]
 	vim.api.nvim_buf_set_lines(0, cursor_line, cursor_line, false, { "- [ ] New TODO" })
@@ -53,6 +60,7 @@ function M.fn.new_todo()
 	vim.cmd("normal! v$h")
 end
 
+---@return nil
 function M.fn.toggle_todo()
 	local line_content = vim.api.nvim_get_current_line()
 	local cursor_line = vim.api.nvim_win_get_cursor(0)[1]
@@ -67,6 +75,7 @@ function M.fn.toggle_todo()
 	vim.api.nvim_buf_set_lines(0, cursor_line - 1, cursor_line, false, { new_line })
 end
 
+---@return nil
 function M.fn.cicle_todo_state()
 	local line_content = vim.api.nvim_get_current_line()
 	if not is_str_todo(line_content) then
@@ -78,7 +87,7 @@ function M.fn.cicle_todo_state()
 	local current_state_char = string.sub(line_content, 4, 4)
 	local next_state_char = next_todo_state(current_state_char)
 
-	local new_line = '- [' .. next_state_char .. '] ' .. string.sub(line_content, 7, string.len(line_content))
+	local new_line = "- [" .. next_state_char .. "] " .. string.sub(line_content, 7, string.len(line_content))
 
 	vim.api.nvim_buf_set_lines(0, cursor_line - 1, cursor_line, false, { new_line })
 end

@@ -2,9 +2,9 @@ local M = {}
 
 M.defaults = {
 	ft = 'todo',
-	-- todo_states = { ' ', 'x', '-', 'D' },
 	todo_states = ' x-D',
-	-- option2 = 'default_value',
+	default_keymaps = true,
+	auto_continue_list = true,
 }
 
 function M.setup(opts)
