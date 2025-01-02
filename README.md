@@ -1,6 +1,11 @@
-# **todo.nvim**
+# **simple-todo.nvim**
 
 A lightweight Neovim plugin to manage and organize your TODOs.
+
+## Looking for More?
+
+Maby this is too simple for your needs. You might also look into:
+- [niuiic/todo.nvim](https://neovimcraft.com/plugin/niuiic/todo.nvim/)
 
 ## **Features**
 
