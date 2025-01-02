@@ -1,7 +1,7 @@
 local M = {}
 
 M.defaults = {
-	ft = 'todo',
+	filetype = 'todo',
 	todo_states = ' x-D',
 	default_keymaps = true,
 	auto_continue_list = true,
