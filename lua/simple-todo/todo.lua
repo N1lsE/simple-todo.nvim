@@ -3,10 +3,10 @@ M.fn = {}
 
 function M.setup(opts)
 	opts = opts or {}
-	require("todo.config").setup(opts)
-	require("todo.keymaps").setup()
+	require("simple-todo.config").setup(opts)
+	require("simple-todo.keymaps").setup()
 
-	local config = require("todo.config")
+	local config = require("simple-todo.config")
 
 	-- setup todo filetype
 	vim.filetype.add({
@@ -39,7 +39,7 @@ end
 ---@param current_state string -- len 1 (a char)
 ---@return string -- len 1 (the next state char)
 local function next_todo_state(current_state)
-	local config = require("todo.config")
+	local config = require("simple-todo.config")
 	local todo_states = config.options.todo_states
 	local len = #todo_states
 

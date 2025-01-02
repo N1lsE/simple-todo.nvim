@@ -1,7 +1,7 @@
 local M = {}
 
 local function new_o()
-	local todo = require("todo.todo")
+	local todo = require("simple-todo.todo")
 
 	if todo.fn.is_line_todo() then
 		vim.cmd('normal! o')
@@ -14,7 +14,7 @@ local function new_o()
 end
 
 local function new_O()
-	local todo = require("todo.todo")
+	local todo = require("simple-todo.todo")
 
 	if todo.fn.is_line_todo() then
 		vim.cmd('normal! O')
@@ -26,7 +26,7 @@ local function new_O()
 end
 
 local function setup_keymaps()
-	local todo = require("todo.todo")
+	local todo = require("simple-todo.todo")
 		vim.keymap.set("n", "<leader>gt", todo.fn.toggle_todo, { desc = "Toggle Todo", buffer = true })
 		vim.keymap.set("n", "<C-b>", todo.fn.toggle_todo, { desc = "Toggle Todo", buffer = true })
 
@@ -43,14 +43,14 @@ local function setup_auto_continue()
 end
 
 local function setup_commands()
-	local todo = require("todo.todo")
+	local todo = require("simple-todo.todo")
 	vim.api.nvim_buf_create_user_command(0, "TodoToggle", todo.fn.toggle_todo, { desc = "Toggle Todo" })
 	vim.api.nvim_buf_create_user_command(0, "TodoCircleState", todo.fn.cycle_todo_state, { desc = "Cycle Todo Status" })
 	vim.api.nvim_buf_create_user_command(0, "TodoNew", todo.fn.new_todo, { desc = "New Todo" })
 end
 
 function M.setup()
-	local config = require("todo.config")
+	local config = require("simple-todo.config")
 
 	vim.api.nvim_create_autocmd("FileType", {
 		pattern = config.options.filetype,

@@ -1,1 +1,1 @@
-require("todo.todo").setup({})
+require("simple-todo.todo").setup({})
