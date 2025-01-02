@@ -76,7 +76,7 @@ function M.fn.toggle_todo()
 end
 
 ---@return nil
-function M.fn.cicle_todo_state()
+function M.fn.cycle_todo_state()
 	local line_content = vim.api.nvim_get_current_line()
 	if not is_str_todo(line_content) then
 		return

@@ -25,31 +25,45 @@ local function new_O()
 	vim.api.nvim_feedkeys('A', 'n', false)
 end
 
-
-function M.setup()
+local function setup_keymaps()
 	local todo = require("todo.todo")
-	local config = require("todo.config")
+		vim.keymap.set("n", "<leader>gt", todo.fn.toggle_todo, { desc = "Toggle Todo", buffer = true })
+		vim.keymap.set("n", "<C-b>", todo.fn.toggle_todo, { desc = "Toggle Todo", buffer = true })
 
-	if config.options.default_keymaps then
-		-- vim.keymap.set('n', '<leader>mp', ':echo "My Plugin Activated"<CR>', { desc = 'Activate My Plugin' })
-		vim.keymap.set("n", "<leader>gt", todo.fn.toggle_todo, { desc = "Toggle Todo" })
-		vim.keymap.set("n", "<C-b>", todo.fn.toggle_todo, { desc = "Toggle Todo" })
+		vim.keymap.set("n", "<leader>gc", todo.fn.cycle_todo_state, { desc = "Cycle Todo Status", buffer = true })
+		vim.keymap.set("n", "<C-m>", todo.fn.cycle_todo_state, { desc = "Cycle Todo Status", buffer = true })
 
-		vim.keymap.set("n", "<leader>gc", todo.fn.cycle_todo_state, { desc = "Cycle Todo Status" })
-		vim.keymap.set("n", "<C-m>", todo.fn.cycle_todo_state, { desc = "Cycle Todo Status" })
+		vim.keymap.set("n", "<leader>gn", todo.fn.new_todo, { desc = "New Todo", buffer = true })
+		vim.keymap.set("n", "<C-n>", todo.fn.new_todo, { desc = "New Todo", buffer = true })
+end
 
-		vim.keymap.set("n", "<leader>gn", todo.fn.new_todo, { desc = "New Todo" })
-		vim.keymap.set("n", "<C-n>", todo.fn.new_todo, { desc = "New Todo" })
-	end
+local function setup_auto_continue()
+		vim.keymap.set("n", "o", new_o, {buffer = true})
+		vim.keymap.set("n", "O", new_O, {buffer = true})
+end
 
-	if config.options.auto_continue_list then
-		vim.keymap.set("n", "o", new_o, {})
-		vim.keymap.set("n", "O", new_O, {})
-	end
-
+local function setup_commands()
+	local todo = require("todo.todo")
 	vim.api.nvim_buf_create_user_command(0, "TodoToggle", todo.fn.toggle_todo, { desc = "Toggle Todo" })
 	vim.api.nvim_buf_create_user_command(0, "TodoCircleState", todo.fn.cycle_todo_state, { desc = "Cycle Todo Status" })
 	vim.api.nvim_buf_create_user_command(0, "TodoNew", todo.fn.new_todo, { desc = "New Todo" })
+end
+
+function M.setup()
+	local config = require("todo.config")
+
+	vim.api.nvim_create_autocmd("FileType", {
+		pattern = config.options.filetype,
+		callback = function ()
+			if config.options.default_keymaps then
+				setup_keymaps()
+			end
+			if config.options.auto_continue_list then
+				setup_auto_continue()
+			end
+			setup_commands()
+		end
+	})
 end
 
 return M
