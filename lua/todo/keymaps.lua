@@ -35,20 +35,20 @@ function M.setup()
 		vim.keymap.set("n", "<leader>gt", todo.fn.toggle_todo, { desc = "Toggle Todo" })
 		vim.keymap.set("n", "<C-b>", todo.fn.toggle_todo, { desc = "Toggle Todo" })
 
-		vim.keymap.set("n", "<leader>gc", todo.fn.cicle_todo_state, { desc = "Cicle Todo Status" })
-		vim.keymap.set("n", "<C-m>", todo.fn.cicle_todo_state, { desc = "Cicle Todo Status" })
+		vim.keymap.set("n", "<leader>gc", todo.fn.cycle_todo_state, { desc = "Cycle Todo Status" })
+		vim.keymap.set("n", "<C-m>", todo.fn.cycle_todo_state, { desc = "Cycle Todo Status" })
 
 		vim.keymap.set("n", "<leader>gn", todo.fn.new_todo, { desc = "New Todo" })
 		vim.keymap.set("n", "<C-n>", todo.fn.new_todo, { desc = "New Todo" })
 	end
 
 	if config.options.auto_continue_list then
-		vim.keymap.set("n", "o", new_o, {  })
-		vim.keymap.set("n", "O", new_O, {  })
+		vim.keymap.set("n", "o", new_o, {})
+		vim.keymap.set("n", "O", new_O, {})
 	end
 
 	vim.api.nvim_buf_create_user_command(0, "TodoToggle", todo.fn.toggle_todo, { desc = "Toggle Todo" })
-	vim.api.nvim_buf_create_user_command(0, "TodoCircleStatus", todo.fn.cicle_todo_state, { desc = "Cicle Todo Status" })
+	vim.api.nvim_buf_create_user_command(0, "TodoCircleState", todo.fn.cycle_todo_state, { desc = "Cycle Todo Status" })
 	vim.api.nvim_buf_create_user_command(0, "TodoNew", todo.fn.new_todo, { desc = "New Todo" })
 end
 

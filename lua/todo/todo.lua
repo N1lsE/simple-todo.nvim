@@ -11,13 +11,13 @@ function M.setup(opts)
 	-- setup todo filetype
 	vim.filetype.add({
 		extension = {
-			todo = config.options.ft,
+			todo = config.options.filetype,
 		},
 	})
 
 	-- Use treesitter markdow syntax highlighting
 	vim.api.nvim_create_autocmd("FileType", {
-		pattern = config.options.ft,
+		pattern = config.options.filetype,
 		callback = function()
 			vim.treesitter.start(0, "markdown")
 		end,
